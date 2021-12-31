@@ -1,14 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView, KeyboardAvoidingView, Platform, TextInput} from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView, KeyboardAvoidingView, Platform, TextInput, Keyboard} from 'react-native';
 import Task from './components/Task';
 
 export default function App() {
   
   const [task, setTask] = useState("");
+  const [taskListItems, setTaskListItems] = useState([]);
 
   const handleSubmitTask = () => {
-    console.log(task);
+    
+    if(task) {
+      Keyboard.dismiss();
+      setTaskListItems([...taskListItems, task]);
+      setTask(null);
+    }
   }
   
   return (
@@ -18,8 +24,11 @@ export default function App() {
           Today's Tasks
         </Text>
         <View style={styles.items}>
-          <Task text={'This is Task 1'} />
-          <Task text={'This is Task 2'} />
+          {
+            taskListItems.map((items, index)=>{
+              return <Task key={index} text = {items}/>
+            })
+          }
         </View>
       </View>
       <KeyboardAvoidingView
