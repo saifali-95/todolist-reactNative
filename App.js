@@ -1,20 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.taskWrapper}>
+        <Text style={styles.title}>
+          Today's Tasks
+        </Text>
+        <View style={styles.items}>
+
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
+  taskWrapper: {
+    paddingTop: 20,
+    paddingHorizontal: 20
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  }
 });
