@@ -1,8 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView, KeyboardAvoidingView, Platform, TextInput} from 'react-native';
 import Task from './components/Task';
 
 export default function App() {
+  
+  const [task, setTask] = useState("");
+
+  const handleSubmitTask = () => {
+    console.log(task);
+  }
+  
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.taskWrapper}>
@@ -18,8 +26,8 @@ export default function App() {
         behavior = {Platform.OS === 'ios' ? "padding" : "height"}
         style = {styles.writeTaskWrapper}
       >
-        <TextInput style={styles.input} placeholder={"Write a new task"}/>
-      <TouchableOpacity>
+        <TextInput style={styles.input} placeholder={"Write a new task"} defaultValue={task} onChangeText={text => setTask(text)}/>
+      <TouchableOpacity onPress={handleSubmitTask}>
         <View style={styles.addWrapper}>
           <Text styles={styles.addText}> + </Text>
         </View>
