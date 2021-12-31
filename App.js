@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView, KeyboardAvoidingView, Platform, TextInput, Keyboard} from 'react-native';
 import Task from './components/Task';
@@ -16,6 +15,14 @@ export default function App() {
       setTask(null);
     }
   }
+
+  const completeTask = (index) => {
+    let updateTask = [...taskListItems];
+    updateTask.splice(index,1);
+    setTaskListItems(updateTask);
+  }
+
+
   
   return (
     <SafeAreaView style={styles.container}>
@@ -25,8 +32,15 @@ export default function App() {
         </Text>
         <View style={styles.items}>
           {
-            taskListItems.map((items, index)=>{
-              return <Task key={index} text = {items}/>
+            taskListItems.map((items, index)=>{ 
+              return(
+                <TouchableOpacity 
+                  key={index} 
+                  onPress={completeTask}
+                >
+                 <Task text = {items}/>
+                </TouchableOpacity>
+              )
             })
           }
         </View>
