@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView, KeyboardAvoidingView, Platform, TextInput, Keyboard} from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView, KeyboardAvoidingView, Platform, TextInput, Keyboard, ScrollView} from 'react-native';
 import Task from './components/Task';
 
 export default function App() {
@@ -30,7 +30,8 @@ export default function App() {
         <Text style={styles.title}>
           Today's Tasks
         </Text>
-        <View style={styles.items}>
+        <ScrollView>
+          <View style={styles.items}>
           {
             taskListItems.map((items, index)=>{ 
               return(
@@ -43,7 +44,8 @@ export default function App() {
               )
             })
           }
-        </View>
+          </View>
+        </ScrollView>  
       </View>
       <KeyboardAvoidingView
         behavior = {Platform.OS === 'ios' ? "padding" : "height"}
